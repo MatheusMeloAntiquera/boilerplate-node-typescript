@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
     volumes:
-      - ./src:/home/node/app/src
+      - ./:/home/node/app/
       - ./nodemon.json:/home/node/app/nodemon.json
     container_name: app
     expose:
