@@ -1,16 +1,42 @@
-version: '3.7'
+version: "3.7"
 
 services:
   app:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./dockerfile
     volumes:
       - ./:/home/node/app/
       - ./nodemon.json:/home/node/app/nodemon.json
     container_name: app
     expose:
-      - '4000'
+      - "4000"
     ports:
-      - '4000:4000'
+      - "4000:4000"
     command: npm run dev
+  mysql:
+    image: mysql
+    container_name: db-mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/mysql/dbdata:/var/lib/mysql
+      - ./docker/mysql/initdb:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: boilernode_password
+      MYSQL_DATABASE: boilerplate_db
+      MYSQL_USER: boilerplate_user
+      MYSQL_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+
+  pg:
+    image: postgres
+    container_name: db-pg
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker/postgresql/dbdata:/var/lib/postgresql/data
+      - ./docker/postgresql/initdb:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_PASSWORD: boilerplate
+      POSTGRES_USER: boilerplate_user
