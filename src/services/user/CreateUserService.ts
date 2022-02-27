@@ -1,8 +1,7 @@
-import { UserInterface } from "src/interfaces/UserInterface";
 import { UserService } from "./UserService";
-
+import { User } from "@entities/UserEntity";
 export class CreateUserService extends UserService {
-  async execute({ name, password, email }: UserInterface) {
+  async execute({ name, password, email }: User) {
     const user = this.userRepository.create({
       name,
       password,

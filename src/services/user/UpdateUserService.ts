@@ -1,8 +1,8 @@
-import { UserInterface } from "src/interfaces/UserInterface";
+import { User } from "@entities/UserEntity";
 import { UserService } from "./UserService";
 
 export class UpdateUserService extends UserService {
-  async execute({ id, name, password, email }: UserInterface) {
+  async execute({ id, name, password, email }: User) {
     const user = await this.userRepository.findOne(id);
     if(user === undefined) {
         return false;
