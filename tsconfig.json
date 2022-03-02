@@ -57,13 +57,13 @@
     "baseUrl": ".",
     /* Base directory to resolve non-absolute module names. */
     "paths": {
-      "@controllers/*": ["./src/controllers/*"],
-      "@entities/*": ["./src/entities/*"],
-      "@repositories/*": ["./src/repositories/*"],
+      "@controllers/*": ["src/http/controllers/*"],
+      "@entities/*": ["src/domain/entities/*"],
+      "@repositories/*": ["src/domain/repositories/*"],
       "@services/*": ["./src/services/*"],
       "@errors/*": ["./src/errors/*"],
-      "@routes/*": ["./src/routes/*"],
-      "@routes": ["./src/routes/index"],
+      "@routes/*": ["src/http/routes/*"],
+      "@routes": ["src/http/routes/index"],
       "@middlewares/*": ["./src/http/middlewares/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@validator/*": ["./src/validator/*"],
