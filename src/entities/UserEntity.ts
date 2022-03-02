@@ -1,4 +1,5 @@
 import { IsBoolean, IsDate, IsEmail, IsNotEmpty, IsString, Length } from "class-validator";
+import { Unique } from "@validator/custom/decorators/Unique";
 import {
   Entity,
   Column,
@@ -27,6 +28,7 @@ export class User {
   })
   @IsEmail()
   @IsNotEmpty()
+  @Unique({ message: `the email address "$value" is already in use by other user`})
   email: string;
 
   @Column({

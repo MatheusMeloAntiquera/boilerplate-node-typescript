@@ -2,9 +2,7 @@ import { User } from "@entities/UserEntity";
 import { ValidationError } from "@errors/ValidationError";
 import { UserRepository } from "@repositories/UserRepository";
 import { ValidationObjectHelper } from "@helpers/ValidationObjectHelper";
-import { getCustomRepository, ObjectID } from "typeorm";
-import { AppError } from "@errors/AppError";
-
+import { getCustomRepository } from "typeorm";
 export abstract class UserService {
   protected userRepository: UserRepository;
   constructor() {
