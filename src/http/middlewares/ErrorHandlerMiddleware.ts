@@ -12,6 +12,7 @@ export default function (
   }
 
   //Todo: Save the error on a file error log
+  console.log(error);
   //Send a generic message error
   return response.status(500).json({
     status: "error",

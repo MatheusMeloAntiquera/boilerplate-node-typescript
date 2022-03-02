@@ -8,6 +8,8 @@ export class CreateUserService extends UserService {
       email,
     });
 
-    return this.userRepository.save(user);
+    await this.isValidUserToSaveOrFail(user);
+    await this.userRepository.save(user);
+    return user;
   }
 }

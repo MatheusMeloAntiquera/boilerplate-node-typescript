@@ -7,28 +7,28 @@ import { Request, Response } from "express";
 
 export class UserController {
   public async index(_req: Request, res: Response): Promise<Response> {
-    return res.json({
+    return res.status(200).json({
       success: true,
       users: await new ListUserService().execute(),
     });
   }
 
   async create(req: Request, res: Response): Promise<Response> {
-    return res.json({
+    return res.status(201).json({
       success: true,
       user: await new CreateUserService().execute(req.body),
     });
   }
 
   public async show(req: Request, res: Response): Promise<Response> {
-    return res.json({
+    return res.status(200).json({
       success: true,
       user: await new FindUserService().execute(req.params.id),
     });
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
-    return res.json({
+    return res.status(200).json({
       success: true,
       user: await new UpdateUserService().execute({
         id: req.params.id,
@@ -37,10 +37,11 @@ export class UserController {
     });
   }
 
-  public async delete(_req: Request, res: Response): Promise<Response> {
-    return res.json({
+  public async delete(req: Request, res: Response): Promise<Response> {
+    await new DeleteUserService().execute(req.params.id);
+    return res.status(200).json({
       success: true,
-      message: "User has deleted with successfully",
+      message: "User has deleted successfully",
     });
   }
 }
