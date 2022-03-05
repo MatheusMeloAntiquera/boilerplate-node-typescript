@@ -20,7 +20,7 @@
     // "outFile": "./",                             /* Concatenate and emit output to single file. */
     "outDir": "./dist",
     /* Redirect output structure to the directory. */
-    "rootDir": "./src",
+    "rootDir": ".",
     /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     // "composite": true,                           /* Enable project compilation */
     // "tsBuildInfoFile": "./",                     /* Specify file to store incremental compilation information */
@@ -57,13 +57,13 @@
     "baseUrl": ".",
     /* Base directory to resolve non-absolute module names. */
     "paths": {
-      "@controllers/*": ["src/http/controllers/*"],
-      "@entities/*": ["src/domain/entities/*"],
-      "@repositories/*": ["src/domain/repositories/*"],
+      "@controllers/*": ["./src/http/controllers/*"],
+      "@entities/*": ["./src/domain/entities/*"],
+      "@repositories/*": ["./src/domain/repositories/*"],
       "@services/*": ["./src/services/*"],
       "@errors/*": ["./src/errors/*"],
-      "@routes/*": ["src/http/routes/*"],
-      "@routes": ["src/http/routes/index"],
+      "@routes/*": ["./src/http/routes/*"],
+      "@routes": ["./src/http/routes/index"],
       "@middlewares/*": ["./src/http/middlewares/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@validator/*": ["./src/validator/*"],
@@ -94,11 +94,13 @@
     "skipLibCheck": true,
     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */ ,
+    "resolveJsonModule": true,
   },
   "exclude": [
     "./node_modules"
   ],
   "include": [
     "./src/**/*",
+    "./tests/**/*",
   ],
 }
