@@ -1,3 +1,3 @@
-export abstract class Factory {
-  public abstract create(data?: Object): Object;
+export abstract class Factory<T> {
+  public abstract create(data?: T): Promise<T>;
 }

@@ -1,25 +1,28 @@
-import { createConnection, getConnection } from "typeorm";
 import { CreateUserService } from "@services/user/CreateUserService";
 import faker from "@faker-js/faker";
 import { User } from "@entities/UserEntity";
 import { ValidationError } from "@errors/ValidationError";
 import { UserFactory } from "@factories/UserFactory";
+import createConnection from "@tests/scripts/createConnection";
+import cleanDatabase from "@tests/scripts/cleanDatabase";
+import closeConnection from "@tests/scripts/closeConnection";
+
+let userFactory: UserFactory;
+let createUserService: CreateUserService;
 
 beforeAll(async () => {
-  // console.log(process.env.TYPEORM_CONNECTION)
-  // Fetch all the entities
   await createConnection();
-  const entities = getConnection().entityMetadatas;
-  for (const entity of entities) {
-    const repository = getConnection().getRepository(entity.name); // Get repository
-    await repository.clear(); // Clear each entity table's content
-  }
+  await cleanDatabase();
+  userFactory = new UserFactory();
+  createUserService = new CreateUserService();
+});
+
+afterAll(async () => {
+  await closeConnection();
 });
 
 describe("Testing CreateUserService...", () => {
-  const userFactory = new UserFactory();
   test("must to be create a user with success", async () => {
-    const createUserService = new CreateUserService();
     const user = await createUserService.execute(await userFactory.create());
     expect(user).toBeInstanceOf(User);
     expect(typeof user.name).toBe("string");
@@ -30,7 +33,6 @@ describe("Testing CreateUserService...", () => {
   });
 
   test("create user must to be failed", async () => {
-    const createUserService = new CreateUserService();
     await createUserService
       .execute(await userFactory.create())
       .catch((error) => {
@@ -47,7 +49,6 @@ describe("Testing CreateUserService...", () => {
   });
 
   test("should be failed because email is not valid address", async () => {
-    const createUserService = new CreateUserService();
     const user = await userFactory.create();
     user.email = "test@test";
     await createUserService.execute(user).catch((error) => {
@@ -62,10 +63,7 @@ describe("Testing CreateUserService...", () => {
     });
   });
   test("should be failed because email is already in use by other user", async () => {
-    const createUserService = new CreateUserService();
-
     const user = await createUserService.execute(await userFactory.create());
-
     await createUserService
       .execute({
         name: faker.name.findName(),

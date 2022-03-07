@@ -20,9 +20,7 @@ export default {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: [
-    "src/**/*.ts"
-  ],
+  collectCoverageFrom: ["src/**/*.ts"],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
@@ -56,7 +54,7 @@ export default {
   // forceCoverageMatch: [],
 
   // A path to a module which exports an async function that is triggered once before all test suites
-  // globalSetup: undefined,
+  // globalSetup: "<rootDir>/tests/scripts/globalSetup",
 
   // A path to a module which exports an async function that is triggered once after all test suites
   // globalTeardown: undefined,
@@ -68,10 +66,7 @@ export default {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  moduleDirectories: [
-    "node_modules",
-    "src"
-  ],
+  moduleDirectories: ["node_modules", "src"],
 
   // An array of file extensions your modules use
   // moduleFileExtensions: [
@@ -85,10 +80,10 @@ export default {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '@controllers/(.*)': ["<rootDir>/src/http/controllers/$1"],
+    "@controllers/(.*)": ["<rootDir>/src/http/controllers/$1"],
     "@entities/(.*)": ["<rootDir>/src/domain/entities/$1"],
     "@repositories/(.*)": ["<rootDir>/src/domain/repositories/$1"],
-    '@services/(.*)': ["<rootDir>/src/services/$1"],
+    "@services/(.*)": ["<rootDir>/src/services/$1"],
     "@errors/(.*)": ["<rootDir>/src/errors/$1"],
     "@routes/(.*)": ["<rootDir>/src/http/routes/$1"],
     "@routes": ["<rootDir>/src/http/routes/index"],
@@ -96,6 +91,7 @@ export default {
     "@helpers/(.*)": ["<rootDir>/src/helpers/$1"],
     "@validator/(.*)": ["<rootDir>/src/validator/$1"],
     "@factories/(.*)": ["<rootDir>/src/domain/factories/$1"],
+    "@tests/(.*)": ["<rootDir>/tests/$1"],
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -140,9 +136,7 @@ export default {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  setupFiles: [
-    "./tests/scripts/dotenv.config.ts"
-  ],
+  setupFiles: ["./tests/scripts/dotenvSetup.ts"],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],
