@@ -8,12 +8,8 @@ interface InterfaceUserFactory {
   password?: string;
 }
 
-export class UserFactory extends Factory {
-  public async create({
-    name,
-    email,
-    password,
-  }: InterfaceUserFactory = {}): Promise<User> {
+export class UserFactory extends Factory<User> {
+  public async create({ name, email, password }: InterfaceUserFactory = {}) {
     const user = new User();
     user.name = name || faker.name.findName();
     user.email = email || faker.internet.email();
