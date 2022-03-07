@@ -95,6 +95,7 @@ export default {
     "@middlewares/(.*)": ["<rootDir>/src/http/middlewares/$1"],
     "@helpers/(.*)": ["<rootDir>/src/helpers/$1"],
     "@validator/(.*)": ["<rootDir>/src/validator/$1"],
+    "@factories/(.*)": ["<rootDir>/src/domain/factories/$1"],
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

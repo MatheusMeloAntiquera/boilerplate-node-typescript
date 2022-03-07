@@ -7,7 +7,7 @@
     "start": "NODE_PATH=./build node build/index.js",
     "build": "tsc -p .",
     "dev": "nodemon src/index.ts",
-    "test": "cross-env NODE_ENV=test jest"
+    "test": "cross-env NODE_ENV=test jest --runInBand --verbose --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",

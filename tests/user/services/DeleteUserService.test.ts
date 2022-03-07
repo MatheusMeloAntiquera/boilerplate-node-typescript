@@ -3,6 +3,7 @@ import faker from "@faker-js/faker";
 import { UserRepository } from "@repositories/UserRepository";
 import { DeleteUserService } from "@services/user/DeleteUserService";
 import { AppError } from "@errors/AppError";
+import { UserFactory } from "@factories/UserFactory";
 
 beforeAll(async () => {
   // console.log(process.env.TYPEORM_CONNECTION)
@@ -18,11 +19,7 @@ beforeAll(async () => {
 describe("Testing DeleteUserService...", () => {
   test("must to be delete a user with success", async () => {
     const userRepository = getCustomRepository(UserRepository);
-    const user = userRepository.create({
-      name: faker.name.findName(),
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-    });
+    const user = userRepository.create(await new UserFactory().create());
 
     await userRepository.save(user);
     await new DeleteUserService().execute(user.id);
@@ -38,5 +35,11 @@ describe("Testing DeleteUserService...", () => {
         expect(error).toBeInstanceOf(AppError);
         expect(error.message).toBe("User not found");
       });
+  });
+
+  test("should be failed because id is not a number", async () => {
+    await expect(
+      new DeleteUserService().execute(faker.datatype.uuid())
+    ).rejects.toThrow();
   });
 });
